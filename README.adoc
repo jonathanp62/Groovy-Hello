@@ -1,0 +1,7 @@
+Groovy-Hello
+------------
+
+A program that demonstrates setting up a Groovy application using Gradle.
+
+Current version: 0.1.0.
+~~~~~~~~~~~~~~~~~~~~~~~
