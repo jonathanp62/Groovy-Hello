@@ -1,7 +1,7 @@
 package net.jmp.groovy.hello
 
 /*
- * (#)App.groovy    0.1.0   02/12/2025
+ * (#)TestLibrarySpock.groovy   0.1.0   02/12/2025
  *
  * @author   Jonathan Parker
  *
@@ -28,57 +28,75 @@ package net.jmp.groovy.hello
  * SOFTWARE.
  */
 
+import spock.lang.Specification
+
 /**
- * The main application class.
+ * The Spock test class for the library class.
  *
  * @version 0.1.0
  * @since   0.1.0
  */
-class App {
-    /**
-     * Return a greeting.
-     *
-     * @return  java.lang.String
-     */
-    String getGreeting() {
-        return 'Hello World!'
-    }
-
-    /**
-     * The run method.
-     */
-    private void run() {
-        def greeting = this.greeting
-
-        println greeting
-
-        this.librarian()
-    }
-
-    /**
-     * The librarian method.
-     */
-    private void librarian() {
+class TestLibrarySpock extends Specification {
+    def "Library with default constructor"() {
+        setup:
         def library = new Library()
 
-        def books = [ new Book('The Assault on Reason', 'Al Gore'),
+        when:
+        def books = library.books
+
+        then:
+        books != null
+        books.size() == 0
+    }
+
+    def "Library and setting books"() {
+        setup:
+        def library = new Library()
+
+        def newBooks = [ new Book('The Assault on Reason', 'Al Gore'),
                       new Book('The Bourne Identity', 'Robert Ludlum'),
                       new Book('The Da Vinci Code', 'Dan Brown'),
                       new Book('The Hunt for Red October', 'Tom Clancy') ]
 
-        library.books = books
+        library.books = newBooks
 
-        library.addBook(new Book('The Hunger Games', 'Suzanne Collins'))
+        when:
+        def books = library.books
 
-        library.books.each {book -> println "Book: ${book.title} by ${book.author}."}
-        library.books.each {book -> println "${book.toString()}"}
+        then:
+        books != null
+        books.size() == 4
     }
 
-    /**
-     * The main method.
-     * @param   args    java.lang.String[]
-     */
-    static void main(String[] args) {
-        new App().run()
+    def "Library with supplied constructor"() {
+        setup:
+        def newBooks = [ new Book('The Assault on Reason', 'Al Gore'),
+                         new Book('The Bourne Identity', 'Robert Ludlum'),
+                         new Book('The Da Vinci Code', 'Dan Brown'),
+                         new Book('The Hunt for Red October', 'Tom Clancy') ]
+
+        def library = new Library(newBooks)
+
+        when:
+        def books = library.books
+
+        then:
+        books != null
+        books.size() == 4
+    }
+
+    def "Library with a book added"() {
+        setup:
+        def library = new Library()
+        def book = new Book('The Assault on Reason', 'Al Gore')
+
+        library.addBook(book)
+
+        when:
+        def books = library.books
+
+        then:
+        books != null
+        books.size() == 1
     }
 }

@@ -35,12 +35,24 @@ package net.jmp.groovy.hello
  * @since   0.1.0
  */
 class Book {
+    /** The title. */
     private String title
+
+    /** The author. */
     private String author
 
+    /**
+     * The default constructor.
+     */
     def Book() {
     }
 
+    /**
+     * A constructor.
+     *
+     * @param   title   java.lang.String
+     * @param   author  java.lang.String
+     */
     def Book(final String title, final String author) {
         assert title != null
         assert author != null
@@ -49,26 +61,51 @@ class Book {
         this.author = new String(author)
     }
 
+    /**
+     * Set the title.
+     *
+     * @param   title   java.lang.String
+     */
     void setTitle(final String title) {
         assert title != null
 
         this.title = new String(title)
     }
 
+    /**
+     * Set the author.
+     *
+     * @param   author  java.lang.String
+     */
     void setAuthor(final String author) {
         assert author != null
 
         this.author = new String(author)
     }
 
+    /**
+     * Get the title.
+     *
+     * @return  java.lang.String
+     */
     String getTitle() {
         return new String(this.title)
     }
 
+    /**
+     * Get the author.
+     *
+     * @return  java.lang.String
+     */
     String getAuthor() {
         return new String(this.author)
     }
 
+    /**
+     * The toString method.
+     *
+     * @return  java.lang.String
+     */
     String toString() {
         return "Book: Title=" + this.title + "; Author=" + author
     }

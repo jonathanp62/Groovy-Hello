@@ -1,7 +1,7 @@
 package net.jmp.groovy.hello
 
 /*
- * (#)TestBookSpock.groovy  0.1.0   02/12/2025
+ * (#)Library.groovy    0.1.0   02/12/2025
  *
  * @author   Jonathan Parker
  *
@@ -28,47 +28,55 @@ package net.jmp.groovy.hello
  * SOFTWARE.
  */
 
-import spock.lang.Specification
-
 /**
- * The Spock test class for the book class.
+ * The library class.
  *
  * @version 0.1.0
  * @since   0.1.0
  */
-class TestBookSpock extends Specification {
-    def "Book with default constructor"() {
-        setup:
-        def book = new Book()
+class Library {
+    /** The list of books. */
+    private List<Book> books = []
 
-        book.author = 'Jonathan Parker'
-        book.title = 'Learning Groovy'
-
-        when:
-        def author = book.author
-        def title = book.title
-
-        then:
-        author != null
-        title != null
-
-        author == 'Jonathan Parker'
-        title == 'Learning Groovy'
+    /**
+     * The default constructor.
+     */
+    def Library() {
     }
 
-    def "Book with supplied constructor"() {
-        setup:
-        def book = new Book('Learning Groovy', 'Jonathan Parker')
+    /**
+     * A constructor.
+     *
+     * @param   books   java.util.List<net.jmp.groovy.hello.Book>
+     */
+    def Library(final List<Book> books) {
+        this.books = books
+    }
 
-        when:
-        def author = book.author
-        def title = book.title
+    /**
+     * Add a book.
+     *
+     * @param   book    net.jmp.groovy.hello.Book
+     */
+    void addBook(final Book book) {
+        this.books << book  // Same as this.books.add(book)
+    }
 
-        then:
-        author != null
-        title != null
+    /**
+     * Get the books.
+     *
+     * @return  java.util.List<net.jmp.groovy.hello.Book>
+     */
+    List<Book> getBooks() {
+        return this.books
+    }
 
-        author == 'Jonathan Parker'
-        title == 'Learning Groovy'
+    /**
+     * Set the books.
+     *
+     * @param   books   java.util.List<net.jmp.groovy.hello.Book>
+     */
+    void setBooks(final List<Book> books) {
+        this.books = books
     }
 }
