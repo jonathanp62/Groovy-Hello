@@ -47,6 +47,15 @@ plugins {
     id 'application'
 }
 
+group = 'net.jmp.groovy.hello'
+version = '0.1.0'
+description = 'Groovy-Hello'
+
+println "The groupId is ${project.group}"
+println "The artifactId is ${project.name}" // Set in settings.gradle
+println "The version is ${project.version}"
+println "The Gradle version is ${gradle.gradleVersion}"
+
 repositories {
     mavenLocal()
     // Use Maven Central for resolving dependencies.

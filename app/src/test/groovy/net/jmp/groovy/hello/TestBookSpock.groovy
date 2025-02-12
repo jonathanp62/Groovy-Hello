@@ -31,21 +31,44 @@ package net.jmp.groovy.hello
 import spock.lang.Specification
 
 /**
- * The Spock test class for the main application.
+ * The Spock test class for the book class.
  *
  * @version 0.1.0
  * @since   0.1.0
  */
-class TestAppSpock extends Specification {
-    def "Application has a greeting"() {
+class TestBookSpock extends Specification {
+    def "Book with default constructor"() {
         setup:
-        def app = new App()
+        def book = new Book()
+
+        book.author = 'Jonathan Parker'
+        book.title = 'Learning Groovy'
 
         when:
-        def result = app.greeting
+        def author = book.author
+        def title = book.title
 
         then:
-        result != null
-        result == 'Hello World!'
+        author != null
+        title != null
+
+        author == 'Jonathan Parker'
+        title == 'Learning Groovy'
+    }
+
+    def "Book with supplied constructor"() {
+        setup:
+        def book = new Book('Learning Groovy', 'Jonathan Parker')
+
+        when:
+        def author = book.author
+        def title = book.title
+
+        then:
+        author != null
+        title != null
+
+        author == 'Jonathan Parker'
+        title == 'Learning Groovy'
     }
 }

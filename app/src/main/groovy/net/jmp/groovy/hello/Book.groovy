@@ -1,7 +1,7 @@
 package net.jmp.groovy.hello
 
 /*
- * (#)TestAppSpock.groovy   0.1.0   02/12/2025
+ * (#)Book.groovy   0.1.0   02/12/2025
  *
  * @author   Jonathan Parker
  *
@@ -28,24 +28,48 @@ package net.jmp.groovy.hello
  * SOFTWARE.
  */
 
-import spock.lang.Specification
-
 /**
- * The Spock test class for the main application.
+ * The book class.
  *
  * @version 0.1.0
  * @since   0.1.0
  */
-class TestAppSpock extends Specification {
-    def "Application has a greeting"() {
-        setup:
-        def app = new App()
+class Book {
+    private String title
+    private String author
 
-        when:
-        def result = app.greeting
+    def Book() {
+    }
 
-        then:
-        result != null
-        result == 'Hello World!'
+    def Book(final String title, final String author) {
+        assert title != null
+        assert author != null
+
+        this.title = new String(title)
+        this.author = new String(author)
+    }
+
+    void setTitle(final String title) {
+        assert title != null
+
+        this.title = new String(title)
+    }
+
+    void setAuthor(final String author) {
+        assert author != null
+
+        this.author = new String(author)
+    }
+
+    String getTitle() {
+        return new String(this.title)
+    }
+
+    String getAuthor() {
+        return new String(this.author)
+    }
+
+    String toString() {
+        return "Book: Title=" + this.title + "; Author=" + author
     }
 }

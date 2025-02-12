@@ -1,7 +1,7 @@
 package net.jmp.groovy.hello
 
 /*
- * (#)TestAppSpock.groovy   0.1.0   02/12/2025
+ * (#)TestBookJunit.groovy  0.1.0   02/12/2025
  *
  * @author   Jonathan Parker
  *
@@ -28,24 +28,35 @@ package net.jmp.groovy.hello
  * SOFTWARE.
  */
 
-import spock.lang.Specification
+import org.junit.jupiter.api.Test
 
 /**
- * The Spock test class for the main application.
+ * The Junit test class for the book class.
  *
  * @version 0.1.0
  * @since   0.1.0
  */
-class TestAppSpock extends Specification {
-    def "Application has a greeting"() {
-        setup:
-        def app = new App()
+class TestBookJunit {
+    @Test
+    void testNewBookDefault() {
+        def book = new Book()
 
-        when:
-        def result = app.greeting
+        assert book != null
 
-        then:
-        result != null
-        result == 'Hello World!'
+        book.author = 'Jonathan Parker'
+        book.title = 'Learning Groovy'
+
+        assert book.author == 'Jonathan Parker'
+        assert book.title == 'Learning Groovy'
+    }
+
+    @Test
+    void testNewBookSupplied() {
+        def book = new Book('Learning Groovy', 'Jonathan Parker')
+
+        assert book != null
+
+        assert book.author == 'Jonathan Parker'
+        assert book.title == 'Learning Groovy'
     }
 }
