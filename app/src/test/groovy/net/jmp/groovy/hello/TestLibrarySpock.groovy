@@ -1,6 +1,7 @@
 package net.jmp.groovy.hello
 
 /*
+ * (#)TestLibrarySpock.groovy   0.2.0   02/13/2025
  * (#)TestLibrarySpock.groovy   0.1.0   02/12/2025
  *
  * @author   Jonathan Parker
@@ -33,24 +34,26 @@ import spock.lang.Specification
 /**
  * The Spock test class for the library class.
  *
- * @version 0.1.0
+ * @version 0.2.0
  * @since   0.1.0
  */
 class TestLibrarySpock extends Specification {
     def "Library with default constructor"() {
-        setup:
+        given: "A new library"
         def library = new Library()
 
-        when:
+        when: "The default constructor creates an empty list of books"
         def books = library.books
 
-        then:
+        then: "The list of books is non-null"
         books != null
-        books.size() == 0
+
+        and: "The list of books is empty"
+        books.isEmpty()
     }
 
     def "Library and setting books"() {
-        setup:
+        given: "A new library with books added"
         def library = new Library()
 
         def newBooks = [ new Book('The Assault on Reason', 'Al Gore'),
@@ -60,16 +63,28 @@ class TestLibrarySpock extends Specification {
 
         library.books = newBooks
 
-        when:
+        when: "The library has a list of books that is not empty"
         def books = library.books
 
-        then:
+        then: "The list of books is non-null"
         books != null
+
+        and: "The list of books has four elements"
         books.size() == 4
+
+        and: "The list of books matches what was set"
+        books.get(0).author == 'Al Gore'
+        books.get(1).author == 'Robert Ludlum'
+        books.get(2).author == 'Dan Brown'
+        books.get(3).author == 'Tom Clancy'
+        books.get(0).title == 'The Assault on Reason'
+        books.get(1).title == 'The Bourne Identity'
+        books.get(2).title == 'The Da Vinci Code'
+        books.get(3).title == 'The Hunt for Red October'
     }
 
     def "Library with supplied constructor"() {
-        setup:
+        given: "A new library with books set in the constructor"
         def newBooks = [ new Book('The Assault on Reason', 'Al Gore'),
                          new Book('The Bourne Identity', 'Robert Ludlum'),
                          new Book('The Da Vinci Code', 'Dan Brown'),
@@ -77,26 +92,44 @@ class TestLibrarySpock extends Specification {
 
         def library = new Library(newBooks)
 
-        when:
+        when: "The library has a list of books that is not empty"
         def books = library.books
 
-        then:
+        then: "The list of books is non-null"
         books != null
+
+        and: "The list of books has four elements"
         books.size() == 4
+
+        and: "The list of books matches what was set"
+        books.get(0).author == 'Al Gore'
+        books.get(1).author == 'Robert Ludlum'
+        books.get(2).author == 'Dan Brown'
+        books.get(3).author == 'Tom Clancy'
+        books.get(0).title == 'The Assault on Reason'
+        books.get(1).title == 'The Bourne Identity'
+        books.get(2).title == 'The Da Vinci Code'
+        books.get(3).title == 'The Hunt for Red October'
     }
 
     def "Library with a book added"() {
-        setup:
+        given: "A new library with one book set in the constructor"
         def library = new Library()
         def book = new Book('The Assault on Reason', 'Al Gore')
 
         library.addBook(book)
 
-        when:
+        when: "The library has a list of books that is not empty"
         def books = library.books
 
-        then:
+        then: "The list of books is non-null"
         books != null
+
+        and: "The list of books has one element"
         books.size() == 1
+
+        and: "The list of books matches what was set"
+        books.get(0).author == 'Al Gore'
+        books.get(0).title == 'The Assault on Reason'
     }
 }

@@ -38,14 +38,16 @@ import spock.lang.Specification
  */
 class TestAppSpock extends Specification {
     def "Application has a greeting"() {
-        setup:
+        given: "A new application"
         def app = new App()
 
-        when:
+        when: "The application has a greeting"
         def result = app.greeting
 
-        then:
+        then: "The greeting is not null"
         result != null
+
+        and: "The greeting matches what was set"
         result == 'Hello World!'
     }
 }

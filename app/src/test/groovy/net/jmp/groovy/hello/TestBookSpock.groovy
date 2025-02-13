@@ -1,6 +1,7 @@
 package net.jmp.groovy.hello
 
 /*
+ * (#)TestBookSpock.groovy  0.2.0   02/13/2025
  * (#)TestBookSpock.groovy  0.1.0   02/12/2025
  *
  * @author   Jonathan Parker
@@ -33,41 +34,43 @@ import spock.lang.Specification
 /**
  * The Spock test class for the book class.
  *
- * @version 0.1.0
+ * @version 0.2.0
  * @since   0.1.0
  */
 class TestBookSpock extends Specification {
     def "Book with default constructor"() {
-        setup:
+        given: "A new book without an author or title"
         def book = new Book()
 
         book.author = 'Jonathan Parker'
         book.title = 'Learning Groovy'
 
-        when:
+        when: "The book has an author and title"
         def author = book.author
         def title = book.title
 
-        then:
+        then: "The author and title are not null"
         author != null
         title != null
 
+        and: "The author and title match what was set"
         author == 'Jonathan Parker'
         title == 'Learning Groovy'
     }
 
     def "Book with supplied constructor"() {
-        setup:
+        given: "A new book with an author and title"
         def book = new Book('Learning Groovy', 'Jonathan Parker')
 
-        when:
+        when: "The book has an author and title"
         def author = book.author
         def title = book.title
 
-        then:
+        then: "The author and title are not null"
         author != null
         title != null
 
+        and: "The author and title match what was set"
         author == 'Jonathan Parker'
         title == 'Learning Groovy'
     }
